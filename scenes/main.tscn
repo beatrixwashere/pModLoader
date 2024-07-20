@@ -1,0 +1,131 @@
+[gd_scene load_steps=8 format=3 uid="uid://db01mskpwpw10"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_5uq7i"]
+[ext_resource type="Shader" path="res://scripts/shaders/bg.gdshader" id="1_wod5m"]
+[ext_resource type="Texture2D" uid="uid://cjun5ptqq8eo3" path="res://images/pmodloader.png" id="2_v0ki2"]
+[ext_resource type="FontFile" uid="uid://bs8k27onycfef" path="res://images/forced_square.ttf" id="3_1el7t"]
+[ext_resource type="Shader" path="res://scripts/shaders/ui.gdshader" id="4_6vrks"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kyu32"]
+shader = ExtResource("1_wod5m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3slh"]
+shader = ExtResource("4_6vrks")
+shader_parameter/rwidth = 18.0
+shader_parameter/rheight = 9.0
+
+[node name="main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5uq7i")
+
+[node name="bg" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_kyu32")
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1088.0
+metadata/_edit_lock_ = true
+
+[node name="logo" type="Sprite2D" parent="."]
+position = Vector2(128, 128)
+scale = Vector2(0.174074, 0.174074)
+texture = ExtResource("2_v0ki2")
+
+[node name="title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 64.0
+offset_right = 1792.0
+offset_bottom = 192.0
+theme_override_fonts/font = ExtResource("3_1el7t")
+theme_override_font_sizes/font_size = 120
+text = "pModLoader"
+vertical_alignment = 1
+
+[node name="mods" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_l3slh")
+layout_mode = 0
+offset_left = 128.0
+offset_top = 288.0
+offset_right = 1280.0
+offset_bottom = 864.0
+color = Color(0, 0, 0.25098, 1)
+
+[node name="scroll" type="ScrollContainer" parent="mods"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 576.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="modlist" type="VBoxContainer" parent="mods/scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="_scrollfix" type="Control" parent="mods/scroll/modlist"]
+layout_mode = 2
+
+[node name="reload" type="Button" parent="mods"]
+layout_mode = 0
+offset_left = 1280.0
+offset_right = 1664.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("3_1el7t")
+theme_override_font_sizes/font_size = 40
+text = "reload mods"
+
+[node name="install" type="Button" parent="mods"]
+layout_mode = 0
+offset_left = 1280.0
+offset_top = 96.0
+offset_right = 1664.0
+offset_bottom = 160.0
+theme_override_fonts/font = ExtResource("3_1el7t")
+theme_override_font_sizes/font_size = 40
+text = "install new"
+
+[node name="directory" type="Label" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 960.0
+offset_right = 1280.0
+offset_bottom = 1024.0
+theme_override_fonts/font = ExtResource("3_1el7t")
+theme_override_font_sizes/font_size = 30
+text = "/home"
+vertical_alignment = 1
+
+[node name="title" type="Label" parent="directory"]
+layout_mode = 0
+offset_top = -64.0
+offset_right = 896.0
+theme_override_fonts/font = ExtResource("3_1el7t")
+theme_override_font_sizes/font_size = 60
+text = "polytrack directory (REQUIRED)"
+vertical_alignment = 1
+
+[node name="set" type="Button" parent="directory"]
+layout_mode = 0
+offset_left = 1280.0
+offset_right = 1664.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("3_1el7t")
+theme_override_font_sizes/font_size = 40
+text = "set directory"
+
+[node name="filedialog" type="FileDialog" parent="directory/set"]
+title = "Open a Directory"
+initial_position = 1
+size = Vector2i(1000, 600)
+ok_button_text = "Select Current Folder"
+file_mode = 2
+access = 2
+
+[connection signal="button_down" from="mods/reload" to="." method="reload_mods"]
+[connection signal="button_down" from="directory/set" to="directory/set/filedialog" method="set_visible" binds= [true]]
+[connection signal="dir_selected" from="directory/set/filedialog" to="." method="setup_mod_environment"]
