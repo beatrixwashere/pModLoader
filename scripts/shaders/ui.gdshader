@@ -3,7 +3,7 @@ const float strength = 0.03;
 const float rate = 0.4;
 const float bthick = 0.1;
 const float bstrength = 0.3;
-const float timescale = 2.0;
+const float timescale = 3.0;
 uniform float rwidth = 1.0;
 uniform float rheight = 1.0;
 float fmod(float x, float y) {
