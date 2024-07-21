@@ -10,6 +10,10 @@ downloading mods isn't available yet since the PolyTrack hasn't been accepted on
 
 ---
 
+## download
+
+this tool is available on [itch.io](https://beatrixwashere.itch.io/pmodloader). once you download it, all you have to do is unzip and run it!
+
 ## setup
 
 you'll need to download and unzip the standalone version of the game from [itch.io](https://kodub.itch.io/polytrack) in order to use this mod loader. once you have, open the tool, select the folder you have polytrack in at the bottom of the screen, and you should be good to go! this will create a mods folder that the tool uses to store and load mods.
