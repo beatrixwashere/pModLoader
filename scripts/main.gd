@@ -9,11 +9,13 @@ var cmenu:String
 var modselected:String
 # startup the modloader
 func _ready()->void:
+	# load polytrack directory if stored
 	if FileAccess.file_exists("user://directory.pmlconfig"):
 		var dirfile:FileAccess = FileAccess.open("user://directory.pmlconfig", FileAccess.READ)
 		ptdir = dirfile.get_pascal_string()
 		$loader/directory.text = ptdir
-	reload_mods()
+		if !DirAccess.dir_exists_absolute(ptdir + "/mods"): setup_mod_environment(ptdir)
+		reload_mods()
 	cmenu = "loader"
 # loads the selected mod and runs polytrack
 func run_mod()->void:
@@ -120,12 +122,13 @@ func unpack_zip(modname:String)->void:
 		return
 	# copy zip contents
 	DirAccess.make_dir_absolute(ptdir + "/mods/" + modname)
-	filebuffer = reader.read_file("app.asar")
-	var file:FileAccess = FileAccess.open(ptdir + "/mods/" + modname + "/app.asar", FileAccess.WRITE)
-	if !file:
-		push_error("failed to open new file")
-		return
-	file.store_buffer(filebuffer)
+	for i in reader.get_files():
+		filebuffer = reader.read_file(i)
+		var file:FileAccess = FileAccess.open(ptdir + "/mods/" + modname + "/" + i, FileAccess.WRITE)
+		if !file:
+			push_error("failed to open new file")
+			return
+		file.store_buffer(filebuffer)
 	reader.close()
 	# delete the zip file
 	DirAccess.remove_absolute(ptdir + "/mods/" + modname + ".zip")
@@ -140,9 +143,27 @@ func setup_mod_environment(dir:String)->void:
 		return
 	# generate mods folder if necessary
 	if !polydir.dir_exists("mods"):
+		$loader/setup.visible = true
 		polydir.make_dir("mods")
-		polydir.make_dir("mods/PolyTrack")
-		# TODO: install vanilla here
+		# install vanilla from repo
+		var http:HTTPRequest = HTTPRequest.new()
+		add_child(http)
+		var reqcompleted:Callable = func _request_completed(result:int, _response_code:int, _headers:PackedStringArray, _body:PackedByteArray):
+			if result != OK:
+				push_error("download failed")
+			remove_child(http)
+			if polydir.file_exists("mods/PolyTrack.zip"):
+				unpack_zip("PolyTrack")
+			else:
+				push_error("zip not found")
+			reload_mods()
+			$loader/setup.visible = false
+		http.connect("request_completed", reqcompleted)
+		http.set_download_file(ptdir + "/mods/PolyTrack.zip")
+		var request:Error = http.request("https://raw.githubusercontent.com/beatrixwashere/pModLoader/main/PolyTrack.zip")
+		if request != OK:
+			push_error("http request failed")
+			$loader/setup.visible = false
 	reload_mods()
 	# set directory display
 	$loader/directory.text = dir

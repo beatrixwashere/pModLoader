@@ -132,6 +132,23 @@ ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
 
+[node name="setup" type="CanvasLayer" parent="loader"]
+visible = false
+
+[node name="bg" type="Panel" parent="loader/setup"]
+offset_right = 1920.0
+offset_bottom = 1088.0
+
+[node name="label" type="Label" parent="loader/setup"]
+offset_right = 1920.0
+offset_bottom = 1088.0
+theme_override_fonts/font = ExtResource("3_1el7t")
+theme_override_font_sizes/font_size = 60
+text = "setting up mods folder...
+(vanilla download requires internet connection)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="modmenu" type="Control" parent="."]
 visible = false
 anchors_preset = 0
@@ -142,6 +159,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="thumbnailpanel" type="Panel" parent="modmenu/info"]
+layout_mode = 0
 offset_left = 128.0
 offset_top = 288.0
 offset_right = 1152.0
@@ -151,12 +169,14 @@ offset_bottom = 800.0
 position = Vector2(640, 544)
 
 [node name="modname" type="Panel" parent="modmenu/info"]
+layout_mode = 0
 offset_left = 1216.0
 offset_top = 288.0
 offset_right = 1792.0
 offset_bottom = 352.0
 
 [node name="label" type="Label" parent="modmenu/info/modname"]
+layout_mode = 0
 offset_left = 32.0
 offset_right = 544.0
 offset_bottom = 64.0
@@ -166,12 +186,14 @@ text = "{modname}"
 vertical_alignment = 1
 
 [node name="description" type="Panel" parent="modmenu/info"]
+layout_mode = 0
 offset_left = 1216.0
 offset_top = 384.0
 offset_right = 1792.0
 offset_bottom = 704.0
 
 [node name="label" type="Label" parent="modmenu/info/description"]
+layout_mode = 0
 offset_left = 32.0
 offset_top = 32.0
 offset_right = 544.0
@@ -181,12 +203,14 @@ theme_override_font_sizes/font_size = 30
 text = "{description}"
 
 [node name="authors" type="Panel" parent="modmenu/info"]
+layout_mode = 0
 offset_left = 1216.0
 offset_top = 736.0
 offset_right = 1792.0
 offset_bottom = 800.0
 
 [node name="label" type="Label" parent="modmenu/info/authors"]
+layout_mode = 0
 offset_left = 32.0
 offset_right = 544.0
 offset_bottom = 64.0
@@ -196,12 +220,14 @@ text = "{authors}"
 vertical_alignment = 1
 
 [node name="modversion" type="Panel" parent="modmenu/info"]
+layout_mode = 0
 offset_left = 1216.0
 offset_top = 832.0
 offset_right = 1792.0
 offset_bottom = 896.0
 
 [node name="label" type="Label" parent="modmenu/info/modversion"]
+layout_mode = 0
 offset_left = 32.0
 offset_right = 544.0
 offset_bottom = 64.0
@@ -211,6 +237,7 @@ text = "{mod version}"
 vertical_alignment = 1
 
 [node name="play" type="Button" parent="modmenu"]
+layout_mode = 0
 offset_left = 224.0
 offset_top = 832.0
 offset_right = 608.0
@@ -220,6 +247,7 @@ theme_override_font_sizes/font_size = 40
 text = "play mod"
 
 [node name="delete" type="Button" parent="modmenu"]
+layout_mode = 0
 offset_left = 224.0
 offset_top = 928.0
 offset_right = 608.0
@@ -266,6 +294,7 @@ theme_override_font_sizes/font_size = 40
 text = "no"
 
 [node name="return" type="Button" parent="modmenu"]
+layout_mode = 0
 offset_left = 672.0
 offset_top = 832.0
 offset_right = 1056.0
