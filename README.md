@@ -46,7 +46,7 @@ mod version
 
 ## suggestions
 
-if you would like to make a suggestion, please open an issue in this repository.
+if you would like to make a suggestion or report a bug, please open an issue in this repository or ping me in the polytrack discord server.
 
 ---
 
