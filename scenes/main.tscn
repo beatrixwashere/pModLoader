@@ -42,12 +42,22 @@ texture = ExtResource("2_v0ki2")
 layout_mode = 0
 offset_left = 256.0
 offset_top = 64.0
-offset_right = 1792.0
+offset_right = 1024.0
 offset_bottom = 192.0
 theme_override_fonts/font = ExtResource("3_1el7t")
 theme_override_font_sizes/font_size = 120
 text = "pModLoader"
 vertical_alignment = 1
+
+[node name="version" type="Label" parent="header"]
+offset_left = 1632.0
+offset_top = 34.0
+offset_right = 1888.0
+offset_bottom = 96.0
+theme_override_fonts/font = ExtResource("3_1el7t")
+theme_override_font_sizes/font_size = 30
+text = "v.1.00.00"
+horizontal_alignment = 2
 
 [node name="loader" type="Control" parent="."]
 anchors_preset = 0
