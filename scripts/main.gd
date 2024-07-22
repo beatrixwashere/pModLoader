@@ -13,9 +13,15 @@ func _ready()->void:
 	if FileAccess.file_exists("user://directory.pmlconfig"):
 		var dirfile:FileAccess = FileAccess.open("user://directory.pmlconfig", FileAccess.READ)
 		ptdir = dirfile.get_pascal_string()
+		# check if directory is valid
+		if !DirAccess.dir_exists_absolute(ptdir) || \
+		(!FileAccess.file_exists(ptdir + "/PolyTrack.exe") && \
+		!FileAccess.file_exists(ptdir + "/PolyTrack")):
+			$loader/polydir.visible = true
 		$loader/directory.text = ptdir
 		if !DirAccess.dir_exists_absolute(ptdir + "/mods"): setup_mod_environment(ptdir)
 		reload_mods()
+	else: $loader/polydir.visible = true
 	cmenu = "loader"
 # loads the selected mod and runs polytrack
 func run_mod()->void:
@@ -40,17 +46,27 @@ func delete_mod()->void:
 	reload_mods()
 	change_menu("loader")
 # reloads the mod list
-func reload_mods()->void:
+func reload_mods(searchstr:String = "")->void:
 	# delete current list options
 	for i in %modlist.get_children():
 		if i.name != "_scrollfix": i.free()
 	# generate list options
 	var modsdir:DirAccess = DirAccess.open(ptdir + "/mods")
 	for i in modsdir.get_directories():
-		var btn:Control = modbutton.instantiate()
-		btn.get_node("label").text = i
-		btn.get_node("button").connect("button_down", select_mod.bind(i))
-		%modlist.add_child(btn)
+		# use for searching mods
+		if searchstr in i || searchstr == "": 
+			# set info
+			var btn:Control = modbutton.instantiate()
+			btn.get_node("label").text = i
+			btn.get_node("button").connect("button_down", select_mod.bind(i))
+			# get mod version if available
+			if FileAccess.file_exists(ptdir + "/mods/" + i + "/info.txt"):
+				var vrsn:FileAccess = FileAccess.open(ptdir + "/mods/" + i + "/info.txt", FileAccess.READ)
+				vrsn.get_line() # skip description
+				vrsn.get_line() # skip authors
+				btn.get_node("version").text = vrsn.get_line()
+			# add to list
+			%modlist.add_child(btn)
 	# fix scrolling
 	%modlist.move_child(%modlist.get_node("_scrollfix"), %modlist.get_child_count() - 1)
 # selects a mod and displays it in the modmenu
@@ -92,6 +108,13 @@ func select_mod(modname:String)->void:
 		$modmenu/info/modversion/label.text = modversion
 	else:
 		push_error("info.txt doesn't exist in mod folder")
+	# tweak some stuff if vanilla is selected
+	if modselected == "PolyTrack":
+		$modmenu/play.text = "play polytrack"
+		$modmenu/delete.visible = false
+	else:
+		$modmenu/play.text = "play mod"
+		$modmenu/delete.visible = true
 	# switch to modmenu
 	change_menu("modmenu")
 # changes the currently displayed menu
@@ -108,8 +131,6 @@ func change_menu(newmenu:String)->void:
 	tween0.tween_property(prevmenu, "position", Vector2(-1920,0), 1)
 	tween1.tween_property(nextmenu, "position", Vector2(0,0), 1)
 	await tween0.finished
-	# finish up
-	prevmenu.visible = false
 # unpacks a zip file containing a mod
 func unpack_zip(modname:String)->void:
 	# open zip file in reader
@@ -144,6 +165,9 @@ func setup_mod_environment(dir:String)->void:
 	# generate mods folder if necessary
 	if !polydir.dir_exists("mods"):
 		$loader/setup.visible = true
+		$loader/setup/loading.rotation = 0
+		var tween0:Tween = create_tween()
+		tween0.tween_property($loader/setup/loading, "rotation", -180, 60)
 		polydir.make_dir("mods")
 		# install vanilla from repo
 		var http:HTTPRequest = HTTPRequest.new()

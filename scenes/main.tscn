@@ -1,10 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://db01mskpwpw10"]
+[gd_scene load_steps=26 format=3 uid="uid://db01mskpwpw10"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_5uq7i"]
 [ext_resource type="Shader" path="res://scripts/shaders/bg.gdshader" id="1_wod5m"]
 [ext_resource type="Texture2D" uid="uid://cjun5ptqq8eo3" path="res://images/pmodloader.png" id="2_v0ki2"]
 [ext_resource type="FontFile" uid="uid://bs8k27onycfef" path="res://images/forced_square.ttf" id="3_1el7t"]
-[ext_resource type="Shader" path="res://scripts/shaders/ui.gdshader" id="4_6vrks"]
+[ext_resource type="Shader" path="res://scripts/shaders/modlist.gdshader" id="4_6vrks"]
+[ext_resource type="Shader" path="res://scripts/shaders/ui.gdshader" id="6_i3iqy"]
+[ext_resource type="Texture2D" uid="uid://cfldxutgcdyvk" path="res://images/play.svg" id="7_08sk3"]
+[ext_resource type="Texture2D" uid="uid://ct4mxvcoglhyd" path="res://images/back.svg" id="7_30kk8"]
+[ext_resource type="Texture2D" uid="uid://dpwbx1casc7po" path="res://images/reset_settings.svg" id="7_fu1it"]
+[ext_resource type="Texture2D" uid="uid://ckcqcpged6u2e" path="res://images/erase.svg" id="8_ufeup"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kyu32"]
 shader = ExtResource("1_wod5m")
@@ -13,6 +18,71 @@ shader = ExtResource("1_wod5m")
 shader = ExtResource("4_6vrks")
 shader_parameter/rwidth = 18.0
 shader_parameter/rheight = 9.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iow48"]
+shader = ExtResource("6_i3iqy")
+shader_parameter/rwidth = 6.0
+shader_parameter/rheight = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8kc87"]
+shader = ExtResource("6_i3iqy")
+shader_parameter/rwidth = 6.0
+shader_parameter/rheight = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k7x8d"]
+shader = ExtResource("6_i3iqy")
+shader_parameter/rwidth = 6.0
+shader_parameter/rheight = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f3epp"]
+shader = ExtResource("6_i3iqy")
+shader_parameter/rwidth = 16.0
+shader_parameter/rheight = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w10uu"]
+shader = ExtResource("6_i3iqy")
+shader_parameter/rwidth = 9.0
+shader_parameter/rheight = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dkfnl"]
+shader = ExtResource("6_i3iqy")
+shader_parameter/rwidth = 9.0
+shader_parameter/rheight = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rfnj6"]
+shader = ExtResource("6_i3iqy")
+shader_parameter/rwidth = 9.0
+shader_parameter/rheight = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5fg0v"]
+shader = ExtResource("6_i3iqy")
+shader_parameter/rwidth = 9.0
+shader_parameter/rheight = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5koub"]
+shader = ExtResource("6_i3iqy")
+shader_parameter/rwidth = 6.0
+shader_parameter/rheight = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c03og"]
+shader = ExtResource("6_i3iqy")
+shader_parameter/rwidth = 6.0
+shader_parameter/rheight = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b0i47"]
+shader = ExtResource("6_i3iqy")
+shader_parameter/rwidth = 6.0
+shader_parameter/rheight = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a20lv"]
+shader = ExtResource("6_i3iqy")
+shader_parameter/rwidth = 6.0
+shader_parameter/rheight = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uje45"]
+shader = ExtResource("6_i3iqy")
+shader_parameter/rwidth = 6.0
+shader_parameter/rheight = 1.0
 
 [node name="main" type="Control"]
 layout_mode = 3
@@ -50,13 +120,14 @@ text = "pModLoader"
 vertical_alignment = 1
 
 [node name="version" type="Label" parent="header"]
+layout_mode = 0
 offset_left = 1632.0
 offset_top = 34.0
 offset_right = 1888.0
 offset_bottom = 96.0
 theme_override_fonts/font = ExtResource("3_1el7t")
 theme_override_font_sizes/font_size = 30
-text = "v.1.00.00"
+text = "v.1.01.00"
 horizontal_alignment = 2
 
 [node name="loader" type="Control" parent="."]
@@ -74,7 +145,7 @@ color = Color(0, 0, 0.25098, 1)
 [node name="scroll" type="ScrollContainer" parent="loader/mods"]
 layout_mode = 0
 offset_right = 1152.0
-offset_bottom = 576.0
+offset_bottom = 512.0
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
@@ -87,6 +158,7 @@ theme_override_constants/separation = 64
 layout_mode = 2
 
 [node name="reload" type="Button" parent="loader/mods"]
+material = SubResource("ShaderMaterial_iow48")
 layout_mode = 0
 offset_left = 1280.0
 offset_right = 1664.0
@@ -96,6 +168,7 @@ theme_override_font_sizes/font_size = 40
 text = "reload mods"
 
 [node name="install" type="Button" parent="loader/mods"]
+material = SubResource("ShaderMaterial_8kc87")
 layout_mode = 0
 offset_left = 1280.0
 offset_top = 96.0
@@ -104,6 +177,16 @@ offset_bottom = 160.0
 theme_override_fonts/font = ExtResource("3_1el7t")
 theme_override_font_sizes/font_size = 40
 text = "install new"
+
+[node name="search" type="LineEdit" parent="loader/mods"]
+layout_mode = 0
+offset_top = 512.0
+offset_right = 1152.0
+offset_bottom = 575.0
+theme_override_fonts/font = ExtResource("3_1el7t")
+theme_override_font_sizes/font_size = 30
+placeholder_text = "search mods"
+alignment = 1
 
 [node name="directory" type="Label" parent="loader"]
 layout_mode = 0
@@ -125,16 +208,74 @@ theme_override_font_sizes/font_size = 60
 text = "polytrack directory"
 vertical_alignment = 1
 
-[node name="set" type="Button" parent="loader/directory"]
+[node name="change" type="Button" parent="loader/directory"]
+material = SubResource("ShaderMaterial_k7x8d")
 layout_mode = 0
 offset_left = 1280.0
 offset_right = 1664.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("3_1el7t")
 theme_override_font_sizes/font_size = 40
+text = "change directory"
+
+[node name="filedialog" type="FileDialog" parent="loader/directory/change"]
+title = "Open a Directory"
+initial_position = 1
+size = Vector2i(1000, 600)
+ok_button_text = "Select Current Folder"
+file_mode = 2
+access = 2
+
+[node name="hidden" type="ColorRect" parent="loader/directory"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="title" type="Label" parent="loader/directory/hidden"]
+offset_left = 32.0
+offset_right = 352.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(0.376471, 0.376471, 0.376471, 1)
+theme_override_fonts/font = ExtResource("3_1el7t")
+theme_override_font_sizes/font_size = 30
+text = "(click box to show)"
+vertical_alignment = 1
+
+[node name="toggle" type="Button" parent="loader/directory/hidden"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 64.0
+flat = true
+
+[node name="polydir" type="CanvasLayer" parent="loader"]
+visible = false
+
+[node name="bg" type="Panel" parent="loader/polydir"]
+offset_right = 1920.0
+offset_bottom = 1088.0
+
+[node name="label" type="Label" parent="loader/polydir"]
+offset_right = 1920.0
+offset_bottom = 1088.0
+theme_override_fonts/font = ExtResource("3_1el7t")
+theme_override_font_sizes/font_size = 60
+text = "please select your polytrack directory to use the tool.
+(should have a PolyTrack.exe or Polytrack directly inside)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="set" type="Button" parent="loader/polydir"]
+material = SubResource("ShaderMaterial_k7x8d")
+offset_left = 768.0
+offset_top = 640.0
+offset_right = 1152.0
+offset_bottom = 704.0
+theme_override_fonts/font = ExtResource("3_1el7t")
+theme_override_font_sizes/font_size = 40
 text = "set directory"
 
-[node name="filedialog" type="FileDialog" parent="loader/directory/set"]
+[node name="filedialog" type="FileDialog" parent="loader/polydir/set"]
 title = "Open a Directory"
 initial_position = 1
 size = Vector2i(1000, 600)
@@ -150,14 +291,20 @@ offset_right = 1920.0
 offset_bottom = 1088.0
 
 [node name="label" type="Label" parent="loader/setup"]
-offset_right = 1920.0
-offset_bottom = 1088.0
+offset_left = 768.0
+offset_right = 1792.0
+offset_bottom = 1024.0
 theme_override_fonts/font = ExtResource("3_1el7t")
 theme_override_font_sizes/font_size = 60
 text = "setting up mods folder...
 (vanilla download requires internet connection)"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="loading" type="Sprite2D" parent="loader/setup"]
+position = Vector2(512, 512)
+texture = ExtResource("7_fu1it")
 
 [node name="modmenu" type="Control" parent="."]
 visible = false
@@ -169,6 +316,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="thumbnailpanel" type="Panel" parent="modmenu/info"]
+material = SubResource("ShaderMaterial_f3epp")
 layout_mode = 0
 offset_left = 128.0
 offset_top = 288.0
@@ -179,6 +327,7 @@ offset_bottom = 800.0
 position = Vector2(640, 544)
 
 [node name="modname" type="Panel" parent="modmenu/info"]
+material = SubResource("ShaderMaterial_w10uu")
 layout_mode = 0
 offset_left = 1216.0
 offset_top = 288.0
@@ -194,8 +343,10 @@ theme_override_fonts/font = ExtResource("3_1el7t")
 theme_override_font_sizes/font_size = 40
 text = "{modname}"
 vertical_alignment = 1
+clip_text = true
 
 [node name="description" type="Panel" parent="modmenu/info"]
+material = SubResource("ShaderMaterial_dkfnl")
 layout_mode = 0
 offset_left = 1216.0
 offset_top = 384.0
@@ -211,8 +362,10 @@ offset_bottom = 288.0
 theme_override_fonts/font = ExtResource("3_1el7t")
 theme_override_font_sizes/font_size = 30
 text = "{description}"
+autowrap_mode = 3
 
 [node name="authors" type="Panel" parent="modmenu/info"]
+material = SubResource("ShaderMaterial_rfnj6")
 layout_mode = 0
 offset_left = 1216.0
 offset_top = 736.0
@@ -228,8 +381,10 @@ theme_override_fonts/font = ExtResource("3_1el7t")
 theme_override_font_sizes/font_size = 30
 text = "{authors}"
 vertical_alignment = 1
+clip_text = true
 
 [node name="modversion" type="Panel" parent="modmenu/info"]
+material = SubResource("ShaderMaterial_5fg0v")
 layout_mode = 0
 offset_left = 1216.0
 offset_top = 832.0
@@ -245,8 +400,10 @@ theme_override_fonts/font = ExtResource("3_1el7t")
 theme_override_font_sizes/font_size = 30
 text = "{mod version}"
 vertical_alignment = 1
+clip_text = true
 
 [node name="play" type="Button" parent="modmenu"]
+material = SubResource("ShaderMaterial_5koub")
 layout_mode = 0
 offset_left = 224.0
 offset_top = 832.0
@@ -256,7 +413,14 @@ theme_override_fonts/font = ExtResource("3_1el7t")
 theme_override_font_sizes/font_size = 40
 text = "play mod"
 
+[node name="icon" type="Sprite2D" parent="modmenu/play"]
+modulate = Color(1, 1, 1, 0.5)
+position = Vector2(32, 32)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_08sk3")
+
 [node name="delete" type="Button" parent="modmenu"]
+material = SubResource("ShaderMaterial_c03og")
 layout_mode = 0
 offset_left = 224.0
 offset_top = 928.0
@@ -265,6 +429,12 @@ offset_bottom = 992.0
 theme_override_fonts/font = ExtResource("3_1el7t")
 theme_override_font_sizes/font_size = 40
 text = "delete mod"
+
+[node name="icon" type="Sprite2D" parent="modmenu/delete"]
+modulate = Color(1, 1, 1, 0.5)
+position = Vector2(32, 32)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_ufeup")
 
 [node name="confirmation" type="CanvasLayer" parent="modmenu/delete"]
 visible = false
@@ -285,6 +455,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="yes" type="Button" parent="modmenu/delete/confirmation"]
+material = SubResource("ShaderMaterial_b0i47")
 offset_left = 384.0
 offset_top = 608.0
 offset_right = 768.0
@@ -295,6 +466,7 @@ text = "yes
 "
 
 [node name="no" type="Button" parent="modmenu/delete/confirmation"]
+material = SubResource("ShaderMaterial_a20lv")
 offset_left = 832.0
 offset_top = 608.0
 offset_right = 1216.0
@@ -304,6 +476,7 @@ theme_override_font_sizes/font_size = 40
 text = "no"
 
 [node name="return" type="Button" parent="modmenu"]
+material = SubResource("ShaderMaterial_uje45")
 layout_mode = 0
 offset_left = 672.0
 offset_top = 832.0
@@ -313,9 +486,23 @@ theme_override_fonts/font = ExtResource("3_1el7t")
 theme_override_font_sizes/font_size = 40
 text = "return to list"
 
+[node name="icon" type="Sprite2D" parent="modmenu/return"]
+modulate = Color(1, 1, 1, 0.5)
+position = Vector2(32, 32)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_30kk8")
+
 [connection signal="button_down" from="loader/mods/reload" to="." method="reload_mods"]
-[connection signal="button_down" from="loader/directory/set" to="loader/directory/set/filedialog" method="set_visible" binds= [true]]
-[connection signal="dir_selected" from="loader/directory/set/filedialog" to="." method="setup_mod_environment"]
+[connection signal="text_submitted" from="loader/mods/search" to="." method="reload_mods"]
+[connection signal="button_down" from="loader/directory/change" to="loader/directory/change/filedialog" method="set_visible" binds= [true]]
+[connection signal="dir_selected" from="loader/directory/change/filedialog" to="." method="setup_mod_environment"]
+[connection signal="button_down" from="loader/directory/hidden/toggle" to="loader/directory/hidden" method="set_color" binds= [Color(0, 0, 0, 0.2)]]
+[connection signal="button_down" from="loader/directory/hidden/toggle" to="loader/directory/hidden/title" method="set_visible" binds= [false]]
+[connection signal="button_up" from="loader/directory/hidden/toggle" to="loader/directory/hidden" method="set_color" binds= [Color(0, 0, 0, 1)]]
+[connection signal="button_up" from="loader/directory/hidden/toggle" to="loader/directory/hidden/title" method="set_visible" binds= [true]]
+[connection signal="button_down" from="loader/polydir/set" to="loader/polydir/set/filedialog" method="set_visible" binds= [true]]
+[connection signal="dir_selected" from="loader/polydir/set/filedialog" to="." method="setup_mod_environment"]
+[connection signal="dir_selected" from="loader/polydir/set/filedialog" to="loader/polydir" method="set_visible" binds= [false]]
 [connection signal="button_down" from="modmenu/play" to="." method="run_mod"]
 [connection signal="button_down" from="modmenu/delete" to="modmenu/delete/confirmation" method="set_visible" binds= [true]]
 [connection signal="button_down" from="modmenu/delete/confirmation/yes" to="." method="delete_mod"]
