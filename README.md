@@ -12,7 +12,9 @@ downloading mods isn't available yet since the PolyTrack hasn't been accepted on
 
 ## download
 
-this tool is available on [itch.io](https://beatrixwashere.itch.io/pmodloader). once you download it, all you have to do is unzip and run it!
+this tool is available on [itch.io](https://beatrixwashere.itch.io/pmodloader). once you download it, all you have to do is and run it!
+
+---
 
 ## setup
 
@@ -40,11 +42,13 @@ mod version
 
 `app.asar` is required for the mod to work, but the other two files are optional and used to display extra info about the mod inside the tool.
 
+since vanilla polytrack comes preinstalled with the mods folder, look in there to see an example of the mod format.
+
 ---
 
 ## suggestions
 
-if you would like to make a suggestion, please open an issue in this repository.
+if you would like to make a suggestion or report a bug, please open an issue in this repository or ping me in the polytrack discord server.
 
 ---
 
