@@ -8,7 +8,7 @@ anchors_preset = 0
 
 [node name="panel" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 1664.0
+offset_right = 1152.0
 offset_bottom = 64.0
 
 [node name="button" type="Button" parent="."]
@@ -22,9 +22,22 @@ flat = true
 [node name="label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 32.0
-offset_right = 1632.0
+offset_right = 1120.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("1_ih4jv")
 theme_override_font_sizes/font_size = 40
 text = "{modname}"
 vertical_alignment = 1
+clip_text = true
+
+[node name="version" type="Label" parent="."]
+modulate = Color(0.627451, 0.627451, 0.627451, 1)
+offset_left = 32.0
+offset_right = 1120.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("1_ih4jv")
+theme_override_font_sizes/font_size = 30
+text = "{modversion}"
+horizontal_alignment = 2
+vertical_alignment = 1
+clip_text = true
